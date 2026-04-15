@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>That Girl's Prompt Studio · TGP Vault</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,700;1,6..96,400&family=DM+Sans:wght@300;400;500&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --blush:#F2D4D4;--blush-light:#FAF0F0;--blush-mid:#E8C4C4;--blush-soft:#F7E4E4;
+  --burgundy:#6B1A2A;--burgundy-deep:#4A0F1C;--rose-dust:#C4939E;--linen:#FBF7F5;
+}
+html,body{width:100%;font-family:'DM Sans',sans-serif;background:var(--linen)}
+#landing{min-height:100vh;background:var(--burgundy);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:3rem 2rem;text-align:center;position:relative;overflow:hidden}
+.ey{font-size:9px;letter-spacing:0.35em;text-transform:uppercase;color:var(--blush);opacity:0.7;margin-bottom:2.5rem}
+.t1{font-family:'Bodoni Moda',serif;font-size:clamp(3rem,10vw,6.5rem);color:#fff;line-height:0.88;text-transform:uppercase}
+.t2{font-family:'Bodoni Moda',serif;font-size:clamp(3rem,10vw,6.5rem);color:var(--blush);line-height:0.88;text-transform:uppercase;margin-bottom:0.2em}
+.sr{font-family:'Bodoni Moda',serif;font-style:italic;font-size:1.3rem;color:var(--blush);margin:1.5rem 0 0.25rem;opacity:0.9}
+.dl{width:40px;height:0.5px;background:var(--blush);opacity:0.3;margin:1.25rem auto}
+.tg{font-size:13px;color:var(--blush);line-height:1.8;max-width:420px;margin:0 auto 0.5rem;font-weight:300;opacity:0.8}
+.sb-text{font-size:10.5px;color:var(--rose-dust);line-height:1.7;max-width:400px;margin:0 auto 2.5rem;opacity:0.9}
+.lb{border:1px solid var(--blush);color:#fff;padding:1rem 2.5rem;font-size:10px;letter-spacing:0.3em;text-transform:uppercase;cursor:pointer;background:transparent;font-family:'DM Sans',sans-serif}
+#app{display:none;background:var(--linen);min-height:100vh}
+.hd{background:var(--burgundy);padding:2.5rem 2rem 2rem;text-align:center;position:relative}
+.ht{font-family:'Bodoni Moda',serif;font-size:3rem;color:#fff;line-height:0.95;text-transform:uppercase}
+.hs{font-family:'Bodoni Moda',serif;font-size:1.5rem;color:var(--blush);line-height:1;margin-top:0.25rem;font-style:italic}
+.hta{font-size:10px;color:var(--blush);margin-top:0.65rem;font-weight:300;letter-spacing:0.06em;opacity:0.7}
+.mn{padding:2rem 1.25rem 1.5rem;max-width:600px;margin:0 auto}
+.sl{font-size:8px;font-weight:500;letter-spacing:0.3em;text-transform:uppercase;color:var(--rose-dust);margin-bottom:0.75rem;display:flex;align-items:center;gap:10px}
+.sl::after{content:'';flex:1;height:0.5px;background:var(--blush-mid)}
+.ur{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:1.75rem}
+.uz{background:#fff;border:1px solid var(--blush-mid);border-radius:14px;padding:1.75rem 1rem;text-align:center;cursor:pointer;position:relative;overflow:hidden;min-height:110px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px}
+.uz.hi{border:1.5px solid var(--burgundy)}
+.ui{width:36px;height:36px;border-radius:50%;background:var(--blush-soft);display:flex;align-items:center;justify-content:center;margin-bottom:2px}
+.ut{font-size:11px;font-weight:500;color:var(--burgundy)}
+.uh{font-size:9px;color:var(--rose-dust);font-style:italic}
+.up{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:13px}
+.uo{position:absolute;inset:0;background:rgba(74,15,28,0.55);border-radius:13px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px}
+.uo span{font-size:10px;color:#fff}.uo small{font-size:8px;color:var(--blush);text-transform:uppercase;letter-spacing:0.12em}
+input[type=file]{display:none}
+.tgr{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:1.75rem}
+.tgr button:last-child:nth-child(odd){grid-column:1/-1;max-width:50%;margin:0 auto;width:100%}
+.pgr{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:1.75rem}
+.tgr button,.pgr button{border-radius:12px;padding:0.9rem 1rem;cursor:pointer;text-align:left;font-family:'DM Sans',sans-serif;outline:none;background:#fff;border:1px solid var(--blush-mid)}
+.gb{width:100%;background:var(--burgundy);color:#fff;border:none;border-radius:10px;padding:1.1rem;font-family:'Bodoni Moda',serif;font-size:1.35rem;letter-spacing:0.06em;text-transform:uppercase;cursor:pointer;margin-bottom:0.5rem}
+.gb:disabled{opacity:0.5;cursor:not-allowed}
+.em{background:rgba(107,26,42,0.05);border:0.5px solid var(--blush-mid);border-radius:8px;padding:0.7rem 1rem;font-size:11px;color:#8B3A4A;margin-top:0.75rem;display:none}
+.em.on{display:block}
+.oa{margin-top:1.75rem;display:none}
+.oa.on{display:block}
+.dvi{height:0.5px;background:var(--blush-mid);margin:1.5rem 0}
+.oc{background:var(--burgundy-deep);border-radius:14px;padding:1.5rem;margin-bottom:1rem}
+.ob{display:inline-block;background:rgba(242,212,212,0.12);border:0.5px solid rgba(242,212,212,0.25);border-radius:20px;padding:3px 14px;font-size:8px;letter-spacing:0.22em;text-transform:uppercase;color:var(--blush);margin-bottom:1rem}
+.otx{font-size:12px;color:rgba(250,240,240,0.9);line-height:1.9;white-space:pre-wrap;min-height:40px}
+.ld{display:inline-flex;gap:5px;align-items:center;padding:0.75rem 0}
+.ld span{width:6px;height:6px;border-radius:50%;background:var(--blush);opacity:0.4;animation:dt 1.2s ease-in-out infinite}
+.ld span:nth-child(2){animation-delay:0.2s}.ld span:nth-child(3){animation-delay:0.4s}
+@keyframes dt{0%,80%,100%{opacity:0.4;transform:scale(1)}40%{opacity:1;transform:scale(1.3)}}
+.cb{margin-top:1.1rem;background:transparent;border:0.5px solid rgba(242,212,212,0.35);color:rgba(242,212,212,0.85);border-radius:8px;padding:0.45rem 1.25rem;font-size:9px;letter-spacing:0.16em;text-transform:uppercase;cursor:pointer;display:none;font-family:'DM Sans',sans-serif}
+.htc{background:#fff;border:1px solid var(--blush-mid);border-radius:14px;padding:1.25rem;margin-bottom:1.5rem}
+.htl{font-size:8px;font-weight:500;letter-spacing:0.25em;text-transform:uppercase;color:var(--rose-dust);margin-bottom:0.6rem}
+.htt{font-size:11px;color:#8B3A4A;line-height:1.8}
+.htt strong{color:var(--burgundy);font-weight:500}
+.ql{font-size:9px;color:var(--rose-dust);text-align:right;margin-top:0.5rem;font-style:italic;display:none}
+.ql.on{display:block}
+.ft{text-align:center;font-size:8px;color:var(--rose-dust);letter-spacing:0.16em;padding:1.5rem 0 2.5rem;text-transform:uppercase;opacity:0.6}
+.step-pill{display:flex;align-items:center;gap:8px;margin-bottom:0.6rem;margin-top:0.25rem}
+.step-n{width:18px;height:18px;border-radius:50%;background:var(--blush-soft);border:1px solid var(--blush-mid);display:flex;align-items:center;justify-content:center;font-size:8px;color:var(--rose-dust);font-weight:500;flex-shrink:0}
+</style>
+</head>
+<body>
+
+<div id="landing">
+  <div class="ey">That Girl's Place Vault · Studio Tools</div>
+  <div class="t1">That Girl's</div>
+  <div class="t2">Prompt Studio.</div>
+  <div class="sr">She belongs in every room.</div>
+  <div class="dl"></div>
+  <div class="tg">Drop your room. Drop your character.<br>Walk away with a prompt that places her perfectly.</div>
+  <div class="sb-text">Open Nano Banana Pro → upload your room image as Style Reference and your character image as IP Adapter → paste the prompt → generate.</div>
+  <button class="lb" onclick="go()">Enter Studio · Entrer</button>
+</div>
+
+<div id="app">
+  <div class="hd">
+    <div class="ey">That Girl's Place Vault</div>
+    <div class="ht">That Girl's</div>
+    <div class="hs">Prompt Studio</div>
+    <div class="hta">Drop your room. Drop your character. Walk away with a prompt that places her perfectly.</div>
+  </div>
+  <div class="mn">
+    <div class="step-pill"><div class="step-n">1</div><div class="sl" style="margin:0;flex:1">Your References</div></div>
+    <div class="ur">
+      <div class="uz" id="rz" onclick="document.getElementById('rf').click()">
+        <div class="ui"><span style="font-size:16px">🏠</span></div>
+        <div class="ut">Room Image</div><div class="uh">your space reference</div>
+        <input type="file" id="rf" accept="image/*" onchange="ul(this,'r')">
+      </div>
+      <div class="uz" id="cz" onclick="document.getElementById('cf').click()">
+        <div class="ui"><span style="font-size:16px">👤</span></div>
+        <div class="ut">Character Image</div><div class="uh">your AI character reference</div>
+        <input type="file" id="cf" accept="image/*" onchange="ul(this,'c')">
+      </div>
+    </div>
+    <div class="step-pill"><div class="step-n">2</div><div class="sl" style="margin:0;flex:1">Style Tier</div></div>
+    <div class="tgr" id="tgr"></div>
+    <div class="step-pill"><div class="step-n">3</div><div class="sl" style="margin:0;flex:1">Pose Variation</div></div>
+    <div class="pgr" id="pgr"></div>
+    <button class="gb" id="gbtn" onclick="gen()">Generate My Prompt</button>
+    <div class="em" id="em"></div>
+    <div class="ql" id="ql"></div>
+    <div class="oa" id="oa">
+      <div class="dvi"></div>
+      <div class="step-pill"><div class="step-n">✦</div><div class="sl" style="margin:0;flex:1">Your Prompt</div></div>
+      <div class="oc">
+        <div class="ob" id="ob">✦ Generating</div>
+        <div class="otx" id="otx"></div>
+        <button class="cb" id="cb" onclick="cp()">Copy Prompt</button>
+      </div>
+      <div class="htc">
+        <div class="htl">How to use this prompt</div>
+        <div class="htt">Open <strong>Nano Banana Pro</strong> → upload your <strong>room image</strong> as Style Reference and your <strong>character image</strong> as IP Adapter → paste the prompt → hit <strong>Generate</strong>.</div>
+      </div>
+    </div>
+    <div class="ft">That Girl's Place Vault · AI Home Environments For AI Influencers</div>
+  </div>
+</div>
+
+<script>
+const TIERS=[
+  {id:'Influencer Drop',desc:'aspirational · IG-ready · warm'},
+  {id:'Editorial',desc:'high fashion · angular · magazine'},
+  {id:'Candid',desc:'raw · natural · real'},
+  {id:'Campaign',desc:'polished · brand-forward · clean'},
+  {id:'Ritual',desc:'living in it · doing something · intentional'}
+];
+const POSES={
+  'Influencer Drop':[{n:'Still & Posed',d:'classic stand, hip pop, mirror selfie'},{n:'Walking',d:'mid-stride, over-shoulder glance'},{n:'Seated',d:'café, lounging, perched elegantly'},{n:'Playful',d:'blowing kiss, cute pout, wink, head back laugh'}],
+  'Editorial':[{n:'Still & Structured',d:'runway stand, power stance, wall frame'},{n:'Walking',d:'purposeful stride, angular movement'},{n:'Seated Editorial',d:'perched, geometric, deliberate'},{n:'Power Gaze',d:'chest lifted, direct eyes, commanding presence'}],
+  'Candid':[{n:'Natural Movement',d:'caught mid-step, in transition'},{n:'Hair Tuck',d:'over-shoulder, adjusting, looking back'},{n:'Lost In Thought',d:'gazing away, hand near face, introspective'},{n:'Playful Candid',d:'giggling, hiding face, spontaneous laugh, cute reaction'}],
+  'Campaign':[{n:'Product Showcase',d:'interacting with product or accessory'},{n:'Walking Motion',d:'purposeful commercial stride'},{n:'Seated Lifestyle',d:'elegant, product naturally displayed'},{n:'Direct Gaze',d:'confident, warm, facing camera'}],
+  'Ritual':[{n:'Morning Routine',d:'coffee, matcha, getting ready, journaling'},{n:'Hosting',d:'setting table, arranging flowers, plating food'},{n:'Cocktail Hour',d:'pouring champagne, holding a glass, mixing drinks'},{n:'Cozy In',d:'reading, wrapped up, candles, lounging with intention'}]
+};
+const POSE_DETAILS={
+  'Influencer Drop':{'Still & Posed':'Body angled approximately 30 degrees from camera, weight shifted fully onto back leg, front knee softly bent and slightly crossed inward. Hips subtly popped to one side. Upper torso twisted back toward camera. One arm bent at elbow with fingertips lightly touching hair near temple. Opposite arm relaxed along outer thigh. Chin lowered subtly, eyes directed toward camera with soft confident smize.','Walking':'Mid-stride walk toward camera, one foot crossing slightly in front of the other, hair moving naturally with momentum. One hand holding bag or phone casually. Candid over-the-shoulder glance back at lens with a knowing half-smile.','Seated':'Seated with legs crossed or tucked elegantly. Torso leaning slightly forward, one elbow resting on knee or surface, chin lightly resting on hand. Relaxed but composed.','Playful':'One of: blowing a kiss toward camera with eyes closed and a soft smile — OR — cute exaggerated pout with one shoulder raised playfully — OR — head thrown back mid-laugh, one hand on chest — OR — winking at camera with a playful smirk.'},
+  'Editorial':{'Still & Structured':'Standing tall with one leg extended forward and toe pointed slightly outward, weight centered with elongated spine and lifted chest. One hand placed sharply on hip with elbow flared for angular silhouette, opposite arm hanging long and straight. Chin elevated slightly, eyes locked into camera with stern composed expression.','Walking':'Deliberate catwalk-style stride toward camera, shoulders back, movement controlled and intentional. One hand slightly raised or jacket pushed back. Not casual — every step is a frame.','Seated Editorial':'Seated on edge of surface with knees angled diagonally away from camera, back elongated, torso leaning slightly forward. One elbow on knee with fingers grazing jawline. Head tilted subtly with eyes looking upward into lens.','Power Gaze':'Standing fully upright, feet shoulder-width apart, both arms relaxed or one lightly on hip. Chest lifted, chin level, eyes directly and intensely into lens. Absolutely commanding. No smile. Pure presence.'},
+  'Candid':{'Natural Movement':'Mid-step walking naturally through the space, arms moving loosely with stride. Head turned slightly off-camera as if reacting to something nearby. Totally unstaged, caught in transition between moments.','Hair Tuck':'Body angled away from camera, head turned back over shoulder. One hand mid-motion tucking hair behind ear or adjusting a strand. Other arm relaxed at side. Soft candid smile or subtle thoughtful expression.','Lost In Thought':'Standing or seated with gaze directed away from lens toward window or distance. Body relaxed and unstaged. One hand near face, resting on collarbone, or holding a cup. Expression soft, introspective, private.','Playful Candid':'One of: caught mid-giggle with hand covering mouth, eyes crinkled — OR — peeking playfully from behind hands or hair — OR — spontaneous laugh mid-conversation — OR — cute surprised expression, mouth in a soft O, eyes wide and bright.'},
+  'Campaign':{'Product Showcase':'Standing confidently with torso angled slightly toward camera, weight shifted softly to one leg. One hand interacting naturally with featured product or accessory, opposite hand resting at hip. Shoulders open, posture upright and deliberate.','Walking Motion':'Mid-stride purposeful commercial walk toward camera, shoulders relaxed but posture polished. One hand adjusting jacket, bag strap, or jewelry while walking.','Seated Lifestyle':'Seated upright with legs crossed at ankle or tucked elegantly. One hand resting gracefully near face or collarbone, other positioned to showcase product or accessory naturally.','Direct Gaze':'Facing camera directly with confident open posture. Both eyes fully engaged with lens. Subtle warm smile or composed poise.'},
+  'Ritual':{'Morning Routine':'Caught in an intimate morning moment — holding a coffee mug or matcha glass with both hands, steam rising, eyes soft and not fully awake yet. Or seated at a vanity mid-skincare routine, one hand near face.','Hosting':'Standing at a beautifully set surface — arranging fresh flowers mid-stem, or placing a dish on a table with care. Torso slightly angled, one arm extended in action.','Cocktail Hour':'Holding a champagne flute or wine glass elegantly — one hand cradling the stem, other hand relaxed. Or mid-pour from a bottle, leaning slightly over a marble surface.','Cozy In':'Curled into a sofa or chair with a book open or held to chest. Wrapped in a throw or silk robe. Legs tucked under body. One hand holding a warm drink. Expression completely at ease.'}
+};
+const TIER_DETAILS={
+  'Influencer Drop':{pc:'Shot slightly below eye level for elongation and model-like proportions. 35mm lens, full body or 3/4 crop.',lt:'Warm golden hour or bright soft window light flooding from one side, diffused and flattering.',sk:'sun-kissed dewy finish, luminous skin, visible pores, natural micro-texture, soft bronzed glow',hr:'voluminous blowout with soft bouncy waves OR sleek high-gloss blowout — polished but effortless',mk:"soft glam — second-skin satin foundation, warm bronzer, terracotta blush swept high, champagne highlight on cheekbones, sheer bronze shimmer on lids, lifted mascara, feathered brows, blurred warm nude-rose lip with glossy center",ot:'Match to room palette. WARM NEUTRAL room: fitted ivory or champagne bias-cut slip dress. DARK MOODY room: black lace corset top + fitted leather trousers. COLORFUL room: color-matched sculptural mini dress. ALWAYS: Christian Louboutin So Kate heels OR YSL Opyum. Hermès Birkin or Kelly bag. Cartier Panthère watch, Van Cleef Alhambra bracelet, layered delicate gold chains.',md:'luxury lifestyle influencer, effortless confidence, aspirational attainable energy',ei:'naturally positioned at the strongest content zone — near window light, in front of mirror, or elegantly perched in seating area'},
+  'Editorial':{pc:'Shot from slightly below chest height using 85mm-105mm lens for elongated dramatic proportions.',lt:'Hard directional key light from 45-degree angle, sculpting deep shadows across cheekbones and jawline.',sk:'matte sculpted complexion, chiseled contour, sharp highlight on high points only, zero skin shine',hr:'sleek sharp center-part glass hair blowout OR severely pulled-back chignon — every hair intentional',mk:'refined editorial glam — matte full-coverage base, razor-sharp contour, precise defined brow, graphic liner OR deeply smoked eye, strong matte nude or bold lip',ot:'MINIMAL room: structural cream or black blazer worn as a dress. WARM LUXURY room: champagne or camel bias-cut gown. ALWAYS: Saint Laurent slingbacks OR Christian Louboutin stilettos. Chanel quilted flap OR YSL clutch. Cartier Love bracelet, bold statement earrings.',md:'luxury high-fashion editorial, magazine cover energy, poised and commanding',ei:'using room geometry architecturally — leaning against structural element, framed by doorway'},
+  'Candid':{pc:'Shot at eye level or slightly above using 50mm lens. Loose asymmetric framing, subtle film grain.',lt:'Soft ambient natural light — overcast window light or open shade. Even diffused shadows.',sk:'skin-first natural glow, freckles and natural marks visible, fresh hydrated texture, dewy but not shiny',hr:'natural texture — undone waves, air-dried curls, loose low bun with pieces falling out.',mk:'barely-there — skin tint, soft peachy blush, brushed-up natural brows, clear gloss, single coat mascara only',ot:'WARM COZY room: oversized cashmere sweater + straight-leg jeans OR matching Alo Yoga set. BRIGHT AIRY room: white linen oversized shirt + wide-leg trousers. ALWAYS: minimal jewelry — one thin gold chain. Loafers, ballet flats, or white sneakers.',md:'luxury off-duty lifestyle, caught in a genuine real moment, intimate and relatable',ei:'caught naturally within the room — moving through space, pausing near window'},
+  'Campaign':{pc:'Eye-level with 50mm-85mm lens. Clean centered or rule-of-thirds composition. Commercial precision.',lt:'Bright polished commercial lighting — soft frontal key light, balanced fill, subtle rim separation.',sk:'camera-perfect glowing complexion, even smooth coverage, luminous controlled highlight',hr:'perfectly set glossy blowout, sleek polished waves, or elegant low chignon — camera-ready',mk:'full camera-ready glam — perfected complexion, soft sculpted contour, defined individual lashes, refined brow, neutral rosy nude lip',ot:'NEUTRAL LUXURY room: tailored cream or camel wide-leg suit OR silk blouse + fitted trousers. ACCESSORIES: Hermès Birkin prominently carried. Cartier Panthère watch. Van Cleef Alhambra necklace. Manolo Blahnik pumps OR Bottega Veneta mules.',md:'luxury brand campaign, aspirational and approachable, premium commercial energy',ei:'positioned intentionally to create a clean brand-forward composition — bag or accessory visible'},
+  'Ritual':{pc:'Shot at eye level or slightly above using 35mm-50mm lens. Intimate framing, slightly loose.',lt:'Soft warm ambient light — morning window light, candle glow, or warm lamp. Atmospheric and intimate.',sk:'skin-first luminous natural finish — minimal coverage, visible texture, natural glow from within',hr:'effortlessly undone — loose waves, messy low bun, silk scrunchie updo, or natural texture.',mk:'ritual-appropriate — morning: bare skin or light tint, brow gel, lip balm. Evening/hosting: soft glam with dewy skin, glossy lip, bronzed glow.',ot:'MORNING: floor-length silk robe in ivory or blush — belted loosely. OR Skims lounge set. HOSTING: off-shoulder white bodysuit + fitted black leather pants OR draped champagne silk blouse. COCKTAIL: satin bias-cut slip dress. COZY: oversized cashmere sweater + silk pajama set. ALWAYS: Cartier Love bracelet stays on. One thin gold chain.',md:'intimate luxury lifestyle, a private moment made editorial, the feeling of watching someone live beautifully',ei:'deeply integrated with the room — interacting with kitchen counter, morning light, table setting, or bedside'}
+};
+
+let st=null,sp=null,rd=null,cd=null,gp_txt='';
+
+function go(){document.getElementById('landing').style.display='none';document.getElementById('app').style.display='block';}
+
+function sb(b,a){
+  if(a){b.style.background='#6B1A2A';b.style.border='2px solid #6B1A2A';b.querySelectorAll('span').forEach(s=>{s.style.color='#fff';s.style.opacity='1';});}
+  else{b.style.background='#fff';b.style.border='1px solid #E8C4C4';const s=b.querySelectorAll('span');if(s[0]){s[0].style.color='#6B1A2A';s[0].style.opacity='1';}if(s[1]){s[1].style.color='#C4939E';s[1].style.opacity='1';}}
+}
+
+function rt(){
+  const g=document.getElementById('tgr');g.innerHTML='';
+  TIERS.forEach(t=>{
+    const b=document.createElement('button');
+    b.innerHTML=`<span style="font-family:'Bodoni Moda',serif;font-size:13px;display:block;margin-bottom:3px;letter-spacing:0.02em">${t.id}</span><span style="font-size:9px;font-style:italic;color:#C4939E">${t.desc}</span>`;
+    sb(b,false);
+    b.onclick=()=>{st=t.id;sp=null;document.querySelectorAll('#tgr button').forEach(x=>sb(x,false));sb(b,true);rp();};
+    g.appendChild(b);
+  });
+}
+
+function rp(){
+  const g=document.getElementById('pgr');
+  if(!st){g.innerHTML='';return;}
+  g.innerHTML='';
+  POSES[st].forEach(p=>{
+    const b=document.createElement('button');
+    b.innerHTML=`<span style="font-size:11px;font-weight:500;display:block;margin-bottom:3px;color:#6B1A2A">${p.n}</span><span style="font-size:9px;font-style:italic;color:#C4939E">${p.d}</span>`;
+    sb(b,false);
+    b.onclick=()=>{sp=p.n;document.querySelectorAll('#pgr button').forEach(x=>sb(x,false));sb(b,true);};
+    g.appendChild(b);
+  });
+}
+
+function gmt(f){if(f.type&&f.type.startsWith('image/'))return f.type;const m={jpg:'image/jpeg',jpeg:'image/jpeg',png:'image/png',gif:'image/gif',webp:'image/webp'};return m[f.name.split('.').pop().toLowerCase()]||'image/jpeg';}
+
+function ul(inp,type){
+  const f=inp.files[0];if(!f)return;
+  const mt=gmt(f);const r=new FileReader();
+  r.onload=e=>{
+    const du=e.target.result,b64=du.split(',')[1];
+    if(type==='r'){rd={b:b64,m:mt,u:du};}else{cd={b:b64,m:mt,u:du};}
+    const z=document.getElementById(type==='r'?'rz':'cz');
+    z.classList.add('hi');
+    z.innerHTML=`<img class="up" src="${du}"><div class="uo"><span>${type==='r'?'Room':'Character'} uploaded ✓</span><small>tap to change</small></div><input type="file" id="${type==='r'?'rf':'cf'}" accept="image/*" onchange="ul(this,'${type}')">`;
+  };
+  r.readAsDataURL(f);
+}
+
+async function gen(){
+  const em=document.getElementById('em');em.classList.remove('on');
+  if(!rd||!cd){em.textContent='Please upload both images first.';em.classList.add('on');return;}
+  if(!st){em.textContent='Please select a style tier.';em.classList.add('on');return;}
+  if(!sp){em.textContent='Please select a pose.';em.classList.add('on');return;}
+
+  const btn=document.getElementById('gbtn');btn.disabled=true;btn.textContent='Generating...';
+  document.getElementById('ob').textContent='✦ '+st+' · '+sp;
+  document.getElementById('oa').classList.add('on');
+  document.getElementById('cb').style.display='none';
+  document.getElementById('otx').innerHTML='<div class="ld"><span></span><span></span><span></span></div>';
+
+  const ti=TIER_DETAILS[st],po=POSE_DETAILS[st][sp];
+
+  try{
+    const res=await fetch('/.netlify/functions/generate',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        characterImage:cd.b,characterMediaType:cd.m,
+        roomImage:rd.b,roomMediaType:rd.m,
+        tier:st,pose:sp,
+        tierDetails:ti,poseDetails:po
+      })
+    });
+    const data=await res.json();
+    if(!res.ok)throw new Error(data.error||'Generation failed');
+    gp_txt=data.prompt;
+    document.getElementById('otx').textContent=gp_txt;
+    document.getElementById('cb').style.display='inline-block';
+    if(data.remaining!==undefined){
+      const ql=document.getElementById('ql');
+      ql.textContent=`${data.remaining} generation${data.remaining===1?'':'s'} remaining today`;
+      ql.classList.add('on');
+    }
+  }catch(e){
+    document.getElementById('otx').textContent='';
+    em.textContent=e.message||'Something went wrong — please try again.';
+    em.classList.add('on');
+  }
+  btn.disabled=false;btn.textContent='Generate My Prompt';
+}
+
+function cp(){
+  if(!gp_txt)return;
+  navigator.clipboard.writeText(gp_txt).then(()=>{
+    const b=document.getElementById('cb');
+    b.textContent='Copied ✓';b.style.borderColor='#F2D4D4';b.style.color='#F2D4D4';
+    setTimeout(()=>{b.textContent='Copy Prompt';b.style.borderColor='rgba(242,212,212,0.35)';b.style.color='rgba(242,212,212,0.85)';},2000);
+  });
+}
+
+rt();rp();
+</script>
+</body>
+</html>
